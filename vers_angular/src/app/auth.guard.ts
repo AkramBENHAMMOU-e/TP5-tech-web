@@ -1,6 +1,6 @@
-import {CanActivateFn, Router} from '@angular/router';
-import {inject} from '@angular/core';
-import {AuthService} from './auth.service';
+import { CanActivateFn, Router, UrlTree } from '@angular/router';
+import { inject } from '@angular/core';
+import { AuthService } from './auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
@@ -9,7 +9,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   if (authService.isLoggedIn()) {
     return true;
   } else {
-    router.navigate(['/login'], { replaceUrl: true });
-    return false;
+    return router.createUrlTree(['/login']); // SSR-safe redirect
   }
 };

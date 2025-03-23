@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service'; // Ensure correct path
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {HeaderComponent} from '../header/header.component';
+import { HeaderComponent } from '../header/header.component';
+import { isPlatformBrowser } from '@angular/common';
 
-// Import or define LoginStats interface (ideally, move to a shared file)
+// Interfaces
 interface LoginStats {
   loginCount: number;
   lastLogin: string | null;
 }
 
-// Define a User interface based on expected structure
 interface User {
   name: string;
-  // Add other properties as needed (e.g., email, id) based on your API response
+  // Add other properties as needed
 }
 
 @Component({
@@ -21,13 +21,17 @@ interface User {
   imports: [CommonModule, HeaderComponent],
   standalone: true,
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'] // Fixed `styleUrl` to `styleUrls` (array)
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  user: User = { name: '' }; // Use User interface instead of any
-  loginStats: LoginStats = { loginCount: 0, lastLogin: null }; // Explicitly typed
+  user: User = { name: '' };
+  loginStats: LoginStats = { loginCount: 0, lastLogin: null };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
     if (!this.authService.isLoggedIn()) {
@@ -35,20 +39,18 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    // Retrieve current user information
-    const userData = localStorage.getItem('currentUser');
-    if (userData) {
-      this.user = JSON.parse(userData) as User; // Type assertion for safety
+    if (isPlatformBrowser(this.platformId)) {
+      const userData = localStorage.getItem('currentUser');
+      if (userData) {
+        this.user = JSON.parse(userData) as User;
+      }
     }
 
-    // Retrieve login statistics
     this.loginStats = this.authService.getLoginStats();
   }
 
-  // Format date for display
   formatDate(dateString: string | null): string {
-    if (!dateString) return 'Jamais connectÃ©';
-
+    if (!dateString) return 'Jamais connecté';
     const date = new Date(dateString);
     return date.toLocaleString('fr-FR', {
       day: '2-digit',
@@ -58,5 +60,4 @@ export class DashboardComponent implements OnInit {
       minute: '2-digit'
     });
   }
-
 }

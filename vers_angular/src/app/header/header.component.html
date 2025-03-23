@@ -1,19 +1,19 @@
-<nav class="navbar">
+<header>
+  <nav class="navbar">
     <div class="navbar-container">
       <div class="navbar-brand">
         <div class="logo-container">
           <img src="assets/logo.png" alt="Logo" class="logo">
         </div>
       </div>
-  
       <div class="navbar-menu">
         <ul class="nav-links">
           <li><a routerLink="/" routerLinkActive="active">Accueil</a></li>
-          <li><a routerLink="" routerLinkActive="active">Dashboard</a></li>
+          <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
           <li><a routerLink="/produits" routerLinkActive="active">A propos</a></li>
           <li><button (click)="logout()" class="btn btn-outline">Deconnexion</button></li>
         </ul>
       </div>
     </div>
   </nav>
-  
+</header>
