@@ -1,0 +1,68 @@
+/* styles communs à mettre dans styles.css ou une feuille partagée */
+:root {
+    --primary-color: #4a6bff;
+    --primary-hover: #3a5bef;
+    --secondary-color: #f5f7ff;
+    --text-color: #333;
+    --light-text: #777;
+    --border-color: #e1e4e8;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --card-radius: 8px;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  body {
+    background-color: #f9fafb;
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+  
+  
+  .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    width: 100%;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--primary-hover);
+  }
+  
+  .btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 16px;
+  }
+  
+  .btn-outline:hover {
+    background-color: var(--secondary-color);
+  }
+  .logo{
+    width: 100px;
+    height: 60px;
+  }
+  .app-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--primary-color);
+  }
+  

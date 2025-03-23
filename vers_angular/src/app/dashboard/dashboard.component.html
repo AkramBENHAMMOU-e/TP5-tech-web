@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="dashboard-container">
+  <div class="dashboard-content">
+    <div class="welcome-section">
+      <h2>Tableau de bord</h2>
+      <p class="welcome-message">Bienvenue {{ user.name }}, vous êtes connecté !</p>
+    </div>
+
+    <div class="dashboard-cards">
+      <div class="dashboard-card stats-card">
+        <h3>Statistiques</h3>
+        <div class="stat-item">
+          <div class="stat-label">Nombre de connexions :</div>
+          <div class="stat-value">{{ loginStats.loginCount }}</div>
+        </div>
+      </div>
+
+      <div class="dashboard-card activity-card">
+        <h3>Activités récentes</h3>
+        <div class="activity-item">
+          <div class="activity-label">Dernière connexion :</div>
+          <div class="activity-value">{{ formatDate(loginStats.lastLogin) }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
